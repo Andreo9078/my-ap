@@ -70,6 +70,7 @@ async function sync() {
     await RequestStatus.create({ name: "Новая" });
     await RequestStatus.create({ name: "В работе" });
     await RequestStatus.create({ name: "Завершена" });
+    await RequestStatus.create({ name: "Отклонена" });
     console.log("Request statuses created");
 
     // Создаем типы техники

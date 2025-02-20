@@ -31,7 +31,7 @@ export const ModalTextArea: React.FC<ModalTextAreaProps> = ({
       open={true}
       cancelText={canselText}
       okText={okText}
-      confirmLoading={false}
+      confirmLoading={true}
       onOk={() => {
         onOk(text);
       }}

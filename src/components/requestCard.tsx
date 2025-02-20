@@ -72,8 +72,18 @@ export const RequestCard: React.FC<RequestCardProps> = ({
           )}
         </Flex>
       )}
-      <Flex style={{ margin: "3px" }} justify={"flex-end"} align={"flex-end"}>
-        <Space>{children}</Space>
+      <Flex
+        style={{ margin: "3px", marginTop: "30px" }}
+        align={"flex-end"}
+        justify="flex-end"
+      >
+        <Space
+          wrap
+          align="end"
+          style={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
+        >
+          <>{children}</>
+        </Space>
       </Flex>
     </Card>
   );

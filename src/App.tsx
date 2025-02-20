@@ -10,7 +10,8 @@ import { useEffect, useState } from "react";
 import { MasterLayout } from "./layouts/MasterLayout";
 import { ActiveRequests } from "./pages/master/ActiveRequests";
 import { DoneRequests } from "./pages/master/DoneRequests";
-import ReportModal from "./components/ReportModal";
+import { ManagerLayout } from "./layouts/ManagerLayout";
+import { RequestsList } from "./pages/manager/requestList";
 
 function App() {
   // const res = f.testDB()
@@ -54,6 +55,22 @@ function App() {
           />
         </>
       );
+    case "manager":
+      return (
+        <>
+          <ManagerLayout
+            pages={
+              new Map([
+                ["new_requests", <RequestsList statusId={1} />],
+                ["active_requests", <RequestsList statusId={2} />],
+                ["done_requests", <RequestsList statusId={3} />],
+                ["rejected_requests", <RequestsList statusId={4} />],
+              ])
+            }
+          />
+        </>
+      );
+
     default:
       return <p>WTF</p>;
   }

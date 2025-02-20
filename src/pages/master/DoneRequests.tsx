@@ -36,7 +36,7 @@ export const DoneRequests: React.FC<DoneRequestsProps> = ({ userId }) => {
       {requests.map((request: Request) => {
         return (
           <div key={request.id} style={{ margin: "16px" }}>
-            {getStatusName(request.status_id) === "Завершена" ? (
+            {getStatusName(request.status_id) === "Завершена" || "Отклонена" ? (
               <RequestCard
                 requestId={request.id.toString()}
                 status={getStatusName(request.status_id)}

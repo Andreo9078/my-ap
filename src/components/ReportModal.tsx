@@ -72,7 +72,7 @@ const ReportModal: React.FC<ModalReportProps> = ({
       open={true}
       cancelText={canselText}
       okText={okText}
-      confirmLoading={false}
+      confirmLoading={true}
       onOk={() => {
         onFinish();
       }}
@@ -81,8 +81,6 @@ const ReportModal: React.FC<ModalReportProps> = ({
       }}
     >
       <Form
-        // labelCol={{ span: 6 }}
-        // wrapperCol={{ span: 18 }}
         form={form}
         name="dynamic_form_complex"
         autoComplete="off"
@@ -90,17 +88,7 @@ const ReportModal: React.FC<ModalReportProps> = ({
         style={{ marginTop: 30 }}
       >
         <Form.Item name="items">
-          <Card
-            title={"Отчет"}
-            key={"report_card"}
-            // extra={
-            //   <CloseOutlined
-            //     onClick={() => {
-            //       remove(field.name);
-            //     }}
-            //   />
-            // }
-          >
+          <Card title={"Отчет"} key={"report_card"}>
             <Form.Item style={{ color: "white" }} label="Список деталей">
               <Form.List name={"detail_list"}>
                 {(subFields, subOpt) => (

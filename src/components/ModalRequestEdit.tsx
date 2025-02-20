@@ -102,6 +102,7 @@ export const ModalRequestEdit = ({
       onCancel={() => {
         handleCancel();
       }}
+      confirmLoading={true}
     >
       <Card style={{ background: colorBgBase, margin: "30px" }}>
         <Form

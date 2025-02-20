@@ -158,6 +158,8 @@ interface Request {
   tech_model: string;
   description: string;
   status_id: number;
+  client_id: number;
+  master_id: number;
   start_date: string;
   end_date?: string;
   master_report?: string;
@@ -176,3 +178,18 @@ interface Status {
     name: string;
   };
 }
+
+interface User {
+  dataValues: {
+    id: number;
+    username: string;
+    password: string;
+    phone_number: string;
+    name: string;
+    last_name: string;
+    patronymic: string;
+    role_id: number;
+  };
+}
+
+enum Statuses {}

@@ -5,14 +5,14 @@ import { useUser } from "../contexts/currentUserContext";
 const { Header, Content, Footer } = Layout;
 
 interface CustomLayoutProps {
-  menuItems: any[];
+  menuItems?: any[];
   defaultSelectedKey: string;
   onMenuClick?: (key: string) => void;
   children?: React.ReactNode;
 }
 
 export const CustomLayout = ({
-  menuItems,
+  menuItems = [],
   defaultSelectedKey,
   onMenuClick = () => {},
   children,
