@@ -12,6 +12,7 @@ import { ActiveRequests } from "./pages/master/ActiveRequests";
 import { DoneRequests } from "./pages/master/DoneRequests";
 import { ManagerLayout } from "./layouts/ManagerLayout";
 import { RequestsList } from "./pages/manager/requestList";
+import { ModalDetail } from "./components/ModalDetail";
 
 function App() {
   // const res = f.testDB()

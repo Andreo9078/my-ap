@@ -72,66 +72,69 @@ export const MyRequests = ({ userId }: MyRequestsProps) => {
 
   return (
     <div style={{ padding: "5px" }}>
-      {requests.map((request: Request) => {
-        return (
-          <div key={request.id} style={{ margin: "16px" }}>
-            <RequestCard
-              requestId={request.id.toString()}
-              status={getStatusName(request.status_id)}
-              techType={getTechTypeName(request.tech_type_id)}
-              modelName={request.tech_model}
-              description={request.description}
-            >
-              {getStatusName(request.status_id) === "Новая" ? (
-                <>
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      openModal("edit", { id: request.id });
-                    }}
-                  >
-                    Редактировать
-                  </Button>
-                  <Button
-                    danger
-                    type="primary"
-                    onClick={() => {
-                      openModal("delete", { id: request.id });
-                    }}
-                  >
-                    Отменить
-                  </Button>
-                </>
-              ) : (
-                <></>
-              )}
-
-              {getStatusName(request.status_id) === "Завершена" ? (
-                commentsMap[request.id] === undefined ||
-                commentsMap[request.id].length === 0 ? (
-                  <Button
-                    onClick={() => {
-                      openModal("comment", { id: request.id });
-                    }}
-                  >
-                    Оставить отзыв
-                  </Button>
+      {requests
+        .slice()
+        .reverse()
+        .map((request: Request) => {
+          return (
+            <div key={request.id} style={{ margin: "16px" }}>
+              <RequestCard
+                requestId={request.id.toString()}
+                status={getStatusName(request.status_id)}
+                techType={getTechTypeName(request.tech_type_id)}
+                modelName={request.tech_model}
+                description={request.description}
+              >
+                {getStatusName(request.status_id) === "Новая" ? (
+                  <>
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        openModal("edit", { id: request.id });
+                      }}
+                    >
+                      Редактировать
+                    </Button>
+                    <Button
+                      danger
+                      type="primary"
+                      onClick={() => {
+                        openModal("delete", { id: request.id });
+                      }}
+                    >
+                      Отменить
+                    </Button>
+                  </>
                 ) : (
-                  <Button
-                    onClick={() => {
-                      openModal("watch-comment", { id: request.id });
-                    }}
-                  >
-                    Мой отзыв
-                  </Button>
-                )
-              ) : (
-                <></>
-              )}
-            </RequestCard>
-          </div>
-        );
-      })}
+                  <></>
+                )}
+
+                {getStatusName(request.status_id) === "Завершена" ? (
+                  commentsMap[request.id] === undefined ||
+                  commentsMap[request.id].length === 0 ? (
+                    <Button
+                      onClick={() => {
+                        openModal("comment", { id: request.id });
+                      }}
+                    >
+                      Оставить отзыв
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => {
+                        openModal("watch-comment", { id: request.id });
+                      }}
+                    >
+                      Мой отзыв
+                    </Button>
+                  )
+                ) : (
+                  <></>
+                )}
+              </RequestCard>
+            </div>
+          );
+        })}
       {modalState && modalState.type === "edit" && (
         <ModalRequestEdit
           requestId={modalState.data.id}

@@ -33,21 +33,25 @@ export const DoneRequests: React.FC<DoneRequestsProps> = ({ userId }) => {
 
   return (
     <>
-      {requests.map((request: Request) => {
-        return (
-          <div key={request.id} style={{ margin: "16px" }}>
-            {getStatusName(request.status_id) === "Завершена" || "Отклонена" ? (
-              <RequestCard
-                requestId={request.id.toString()}
-                status={getStatusName(request.status_id)}
-                techType={getTechTypeName(request.tech_type_id)}
-                modelName={request.tech_model}
-                description={request.description}
-              ></RequestCard>
-            ) : undefined}
-          </div>
-        );
-      })}
+      {requests
+        .slice()
+        .reverse()
+        .map((request: Request) => {
+          return (
+            <div key={request.id} style={{ margin: "16px" }}>
+              {getStatusName(request.status_id) === "Завершена" ||
+              "Отклонена" ? (
+                <RequestCard
+                  requestId={request.id.toString()}
+                  status={getStatusName(request.status_id)}
+                  techType={getTechTypeName(request.tech_type_id)}
+                  modelName={request.tech_model}
+                  description={request.description}
+                ></RequestCard>
+              ) : undefined}
+            </div>
+          );
+        })}
       ;
     </>
   );

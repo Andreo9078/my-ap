@@ -72,7 +72,7 @@ const ReportModal: React.FC<ModalReportProps> = ({
       open={true}
       cancelText={canselText}
       okText={okText}
-      confirmLoading={true}
+      confirmLoading={false}
       onOk={() => {
         onFinish();
       }}

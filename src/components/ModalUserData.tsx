@@ -50,7 +50,7 @@ const ModalUserData: React.FC<ModalReportProps> = ({
       title={title}
       open={true}
       okText={okText}
-      confirmLoading={true}
+      confirmLoading={false}
       onCancel={onClose}
       onOk={() => {
         console.log("OK!");

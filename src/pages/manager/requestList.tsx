@@ -8,6 +8,7 @@ import { RequestCard } from "../../components/requestCard";
 import { Button, Modal, Space } from "antd";
 import ModalUserData from "../../components/ModalUserData";
 import { MasterSelectModal } from "../../components/MasterSelectModal";
+import { ModalDetail } from "../../components/ModalDetail";
 
 // interface NewRequestsProps {
 //   userId: number | undefined;
@@ -21,7 +22,8 @@ type ModalState =
   | { type: "master-data"; data: { id: number; master_id: number } }
   | { type: "master-select"; data: { id: number } }
   | { type: "delete"; data: { id: number } }
-  | { type: "comment"; data: { id: number } };
+  | { type: "comment"; data: { id: number } }
+  | { type: "report"; data: { id: number } };
 
 export const RequestsList = ({ statusId }: { statusId: number }) => {
   const electronAPI = useElectronAPI();
@@ -75,70 +77,86 @@ export const RequestsList = ({ statusId }: { statusId: number }) => {
 
   return (
     <div style={{ padding: "5px" }}>
-      {requests.map((request: Request) => {
-        return (
-          <div key={request.id} style={{ margin: "16px" }}>
-            <RequestCard
-              requestId={request.id.toString()}
-              status={getStatusName(request.status_id)}
-              techType={getTechTypeName(request.tech_type_id)}
-              modelName={request.tech_model}
-              description={request.description}
-            >
-              <Button
-                onClick={() =>
-                  openModal("user-data", {
-                    id: request.id,
-                    client_id: request.client_id,
-                  })
-                }
+      {requests
+        .slice()
+        .reverse()
+        .map((request: Request) => {
+          return (
+            <div key={request.id} style={{ margin: "16px" }}>
+              <RequestCard
+                requestId={request.id.toString()}
+                status={getStatusName(request.status_id)}
+                techType={getTechTypeName(request.tech_type_id)}
+                modelName={request.tech_model}
+                description={request.description}
               >
-                Показать данные клиента
-              </Button>
-              <Button
-                onClick={() =>
-                  openModal("master-data", {
-                    id: request.id,
-                    master_id: request.master_id,
-                  })
-                }
-              >
-                Показать данные мастера
-              </Button>
-              {statusId === 1 || statusId === 2 ? (
-                <>
+                <Button
+                  onClick={() =>
+                    openModal("user-data", {
+                      id: request.id,
+                      client_id: request.client_id,
+                    })
+                  }
+                >
+                  Показать данные клиента
+                </Button>
+                {request.master_id ? (
                   <Button
-                    type="primary"
                     onClick={() =>
-                      openModal("master-select", { id: request.id })
+                      openModal("master-data", {
+                        id: request.id,
+                        master_id: request.master_id,
+                      })
                     }
                   >
-                    Назначить мастера
+                    Показать данные мастера
                   </Button>
+                ) : (
+                  <></>
+                )}
+                {statusId === 1 || statusId === 2 ? (
+                  <>
+                    <Button
+                      type="primary"
+                      onClick={() =>
+                        openModal("master-select", { id: request.id })
+                      }
+                    >
+                      Назначить мастера
+                    </Button>
+                    <Button
+                      type="primary"
+                      danger
+                      onClick={() => openModal("delete", { id: request.id })}
+                    >
+                      Отклонить заявку
+                    </Button>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {statusId === 3 && commentsMap[request.id]?.length !== 0 ? (
                   <Button
-                    type="primary"
-                    danger
-                    onClick={() => openModal("delete", { id: request.id })}
+                    onClick={() => openModal("comment", { id: request.id })}
                   >
-                    Отклонить заявку
+                    Посмотреть комментарий
                   </Button>
-                </>
-              ) : (
-                <></>
-              )}
-              {statusId === 3 && commentsMap[request.id]?.length !== 0 ? (
-                <Button
-                  onClick={() => openModal("comment", { id: request.id })}
-                >
-                  Посмотреть комментарий
-                </Button>
-              ) : (
-                <></>
-              )}
-            </RequestCard>
-          </div>
-        );
-      })}
+                ) : (
+                  <></>
+                )}
+                {statusId === 3 ? (
+                  <Button
+                    onClick={() => openModal("report", { id: request.id })}
+                  >
+                    Посмотреть отчет
+                  </Button>
+                ) : (
+                  <></>
+                )}
+              </RequestCard>
+            </div>
+          );
+        })}
       {modalState?.type == "user-data" && (
         <ModalUserData
           onOk={closeModal}
@@ -188,6 +206,9 @@ export const RequestsList = ({ statusId }: { statusId: number }) => {
             <p>{commentsMap[modalState.data.id][0]?.dataValues.text}</p>
           </>
         </Modal>
+      )}
+      {modalState?.type === "report" && (
+        <ModalDetail requestId={modalState.data.id} onClose={closeModal} />
       )}
     </div>
   );

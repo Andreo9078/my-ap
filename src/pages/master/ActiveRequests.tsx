@@ -19,6 +19,7 @@ export const ActiveRequests: React.FC<ActiveRequestsProps> = ({ userId }) => {
 
   const { requests, update: updateRequests } = useRequests({
     masterId: userId,
+    statusId: 2,
   });
   const { techTypes, update: updateTechTypes } = useTechTypes();
   const { statuses, update: updateStatuses } = useStatuses();
@@ -39,10 +40,12 @@ export const ActiveRequests: React.FC<ActiveRequestsProps> = ({ userId }) => {
 
   return (
     <>
-      {requests.map((request: Request) => {
-        return (
-          <div key={request.id} style={{ margin: "16px" }}>
-            {getStatusName(request.status_id) !== "Завершена" || "Отклонена" ? (
+      {requests
+        .slice()
+        .reverse()
+        .map((request: Request) => {
+          return (
+            <div key={request.id} style={{ margin: "16px" }}>
               <RequestCard
                 requestId={request.id.toString()}
                 status={getStatusName(request.status_id)}
@@ -50,21 +53,18 @@ export const ActiveRequests: React.FC<ActiveRequestsProps> = ({ userId }) => {
                 modelName={request.tech_model}
                 description={request.description}
               >
-                {getStatusName(request.status_id) !== "Завершена" ? (
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      openModal("report", { id: request.id });
-                    }}
-                  >
-                    Завершить
-                  </Button>
-                ) : undefined}
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    openModal("report", { id: request.id });
+                  }}
+                >
+                  Завершить
+                </Button>
               </RequestCard>
-            ) : undefined}
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
       ;
       {modalState?.type === "report" && (
         <ReportModal

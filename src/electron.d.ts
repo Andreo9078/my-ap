@@ -128,8 +128,8 @@ interface Window {
       usedDetail: {
         getUsedDetail: (id: number) => Promise<any>;
         getUsedDetails: (filters: {
-          request_id?: number;
-          detail_id?: number;
+          requestId?: number;
+          detailId?: number;
         }) => Promise<any[]>;
         createUsedDetail: (usedDetail: {
           detail_id: number;
