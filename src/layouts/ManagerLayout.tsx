@@ -5,6 +5,7 @@ import {
   CarryOutOutlined,
   ClockCircleOutlined,
   CloseSquareOutlined,
+  PieChartOutlined,
 } from "@ant-design/icons";
 
 export const ManagerLayout = ({
@@ -38,6 +39,11 @@ export const ManagerLayout = ({
           key: "rejected_requests",
           icon: <CloseSquareOutlined />,
           label: "Отклоненные заявки",
+        },
+        {
+          key: "statistics",
+          icon: <PieChartOutlined />,
+          label: "Статистика",
         },
       ]}
     >

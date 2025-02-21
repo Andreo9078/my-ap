@@ -68,7 +68,7 @@ export const ModalDetail: React.FC<ModalDetailsPropertis> = ({
   return (
     <Modal
       open={true}
-      onClose={onClose}
+      onCancel={onClose}
       footer={[
         <Button key="ok" type="primary" onClick={onClose}>
           Закрыть

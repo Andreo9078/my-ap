@@ -24,15 +24,6 @@ async function sync() {
     // Создаем тестовых пользователей
     const users = [
       {
-        username: "admin",
-        password: "admin",
-        role_id: adminRole.get("id"),
-        phone_number: "+79991111111",
-        name: "Админ",
-        last_name: "Админов",
-        patronymic: "Админович",
-      },
-      {
         username: "client",
         password: "client",
         role_id: clientRole.get("id"),
@@ -67,9 +58,9 @@ async function sync() {
     }
 
     // Создаем статусы заявок
-    await RequestStatus.create({ name: "Новая" });
-    await RequestStatus.create({ name: "В работе" });
-    await RequestStatus.create({ name: "Завершена" });
+    await RequestStatus.create({ name: "Новая заявка" });
+    await RequestStatus.create({ name: "В процессе ремонта" });
+    await RequestStatus.create({ name: "Готова к выдаче" });
     await RequestStatus.create({ name: "Отклонена" });
     console.log("Request statuses created");
 

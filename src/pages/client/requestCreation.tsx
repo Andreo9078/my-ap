@@ -46,7 +46,7 @@ export const RequestCreation = () => {
           tech_type_id: Number(values.techType),
           tech_model: values.model,
           description: values.description,
-          status_id: 1, // ID статуса "Новая"
+          status_id: 1, // ID статуса "Новая заявка"
           client_id: user?.id,
           start_date: new Date(),
           end_date: null,

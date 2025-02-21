@@ -85,7 +85,7 @@ export const MyRequests = ({ userId }: MyRequestsProps) => {
                 modelName={request.tech_model}
                 description={request.description}
               >
-                {getStatusName(request.status_id) === "Новая" ? (
+                {getStatusName(request.status_id) === "Новая заявка" ? (
                   <>
                     <Button
                       type="primary"
@@ -109,7 +109,7 @@ export const MyRequests = ({ userId }: MyRequestsProps) => {
                   <></>
                 )}
 
-                {getStatusName(request.status_id) === "Завершена" ? (
+                {getStatusName(request.status_id) === "Готова к выдаче" ? (
                   commentsMap[request.id] === undefined ||
                   commentsMap[request.id].length === 0 ? (
                     <Button

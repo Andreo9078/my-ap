@@ -67,7 +67,7 @@ const LoginForm: React.FC = () => {
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <h2 style={{ textAlign: "center", paddingBottom: "20px" }}>Login</h2>
+        <h2 style={{ textAlign: "center", paddingBottom: "20px" }}>Войти</h2>
         <Form
           name="login"
           initialValues={{ remember: true }}
@@ -76,16 +76,16 @@ const LoginForm: React.FC = () => {
         >
           <Form.Item
             name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            rules={[{ required: true, message: "Введите имя пользователя!" }]}
           >
-            <Input placeholder="Username" />
+            <Input placeholder="Имя пользователя" />
           </Form.Item>
 
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[{ required: true, message: "Введите пароль" }]}
           >
-            <Input.Password placeholder="Password" />
+            <Input.Password placeholder="Пароль" />
           </Form.Item>
 
           {loginError && (
@@ -94,13 +94,13 @@ const LoginForm: React.FC = () => {
             </div>
           )}
 
-          <Form.Item name="remember" valuePropName="checked">
+          {/* <Form.Item name="remember" valuePropName="checked">
             <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              Login
+              Войти
             </Button>
           </Form.Item>
         </Form>

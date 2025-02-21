@@ -13,6 +13,7 @@ import { DoneRequests } from "./pages/master/DoneRequests";
 import { ManagerLayout } from "./layouts/ManagerLayout";
 import { RequestsList } from "./pages/manager/requestList";
 import { ModalDetail } from "./components/ModalDetail";
+import { Statistic } from "./pages/manager/statistic";
 
 function App() {
   // const res = f.testDB()
@@ -66,6 +67,7 @@ function App() {
                 ["active_requests", <RequestsList statusId={2} />],
                 ["done_requests", <RequestsList statusId={3} />],
                 ["rejected_requests", <RequestsList statusId={4} />],
+                ["statistics", <Statistic />],
               ])
             }
           />

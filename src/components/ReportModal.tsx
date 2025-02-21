@@ -57,6 +57,7 @@ const ReportModal: React.FC<ModalReportProps> = ({
       electronAPI.requests.request.updateRequest(request.dataValues.id, {
         status_id: 3,
         master_report: values.report,
+        end_date: new Date(),
       });
     }
 
