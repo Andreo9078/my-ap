@@ -27,7 +27,7 @@ const LoginForm: React.FC = () => {
       });
 
       if (users.length === 0) {
-        setLoginError("Invalid username or password");
+        setLoginError("Неверный логин или пароль");
         return;
       } else if (users.length === 1) {
         console.log(users[0]);
@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
         console.error("Login error", users);
       }
     } catch (err) {
-      setLoginError("Invalid username or password");
+      setLoginError("Неверный логин или пароль");
       return;
     }
   };

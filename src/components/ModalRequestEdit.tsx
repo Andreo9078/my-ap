@@ -97,6 +97,8 @@ export const ModalRequestEdit = ({
   return (
     <Modal
       title="Редактирование заявки"
+      okText="ОК"
+      cancelText="Отмена"
       open={isModalOpen} // Используем open вместо visible
       onOk={onFinish}
       onCancel={() => {

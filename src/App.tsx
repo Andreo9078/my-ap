@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      electronAPI.auth.role.getRole(user.id).then((role) => {
+      electronAPI.auth.role.getRole(user.role_id).then((role) => {
         console.log("User role:", role.dataValues.name);
         setUserRole(role.dataValues.name);
       });

@@ -195,6 +195,14 @@ const Request = db.define(
         key: "id",
       },
     },
+    fault_type_id:{
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "fault_types",
+        key: "id",
+      },
+    },
     master_report: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -205,6 +213,26 @@ const Request = db.define(
     timestamps: false,
   }
 );
+
+const FaultType = db.define(
+  "FaultType",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+  },
+  {
+    tableName: "fault_types",
+    timestamps: false,
+  }
+)
 
 // Определяем связи
 UsedDetail.belongsTo(Detail, { foreignKey: "detail_id" });
@@ -220,5 +248,6 @@ Request.belongsTo(RequestStatus, { foreignKey: "status_id" });
 Request.belongsTo(User, { foreignKey: "master_id", as: "master" });
 Request.belongsTo(User, { foreignKey: "client_id", as: "client" });
 Request.hasMany(UsedDetail, { foreignKey: "request_id", as: "used_details" });
+Request.hasMany(FaultType, { foreignKey: "fault_type_id", as: "fault_types" });
 
-export { UsedDetail, TechType, RequestStatus, Comment, Detail, Request };
+export { UsedDetail, TechType, RequestStatus, Comment, Detail, Request, FaultType };

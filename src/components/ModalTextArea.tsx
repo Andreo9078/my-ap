@@ -20,8 +20,8 @@ export const ModalTextArea: React.FC<ModalTextAreaProps> = ({
   disabled = false,
   onOk = () => {},
   onCancel = () => {},
-  canselText = "Cancel",
-  okText = "Save",
+  canselText = "Отмена",
+  okText = "ОК",
 }) => {
   const [text, setText] = useState<string>(defaultText);
 

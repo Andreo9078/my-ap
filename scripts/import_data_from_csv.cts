@@ -6,6 +6,7 @@ const workbook = XLSX.readFile(
   "./scripts/data/Пользователи/inputDataUsers.csv",
   {
     raw: true,
+    codepage: 65001 
   }
 );
 

@@ -6,6 +6,7 @@ import { detailService } from "./requests/detailService.cjs";
 import { requestService } from "./requests/requestService.cjs";
 import { commentService } from "./requests/commentService.cjs";
 import { usedDetailsService } from "./requests/usedDetailsService.cjs";
+import { faultTypesService } from "./requests/faultTypesService.cjs";
 
 const services: Record<string, any> = {
   auth: {
@@ -19,6 +20,7 @@ const services: Record<string, any> = {
     request: requestService,
     comment: commentService,
     usedDetail: usedDetailsService,
+    faultType: faultTypesService,
   },
 };
 

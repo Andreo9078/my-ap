@@ -20,7 +20,7 @@ export const MasterSelectModal: React.FC<MasterSelectModalProps> = ({
 
   useEffect(() => {
     const fetchMasters = async () => {
-      const masters = await electronAPI.auth.user.getUsers({ roleId: 3 });
+      const masters = await electronAPI.auth.user.getUsers({ roleId: 2 });
       setMasters(masters);
 
       const masterRequestsCountMap = new Map();

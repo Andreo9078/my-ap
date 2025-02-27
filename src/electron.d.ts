@@ -87,6 +87,7 @@ interface Window {
           master_id: number | null;
           client_id: number;
           master_report?: string;
+          fault_type_id?: number;
         }) => Promise<any>;
         updateRequest: (
           id: number,
@@ -100,6 +101,7 @@ interface Window {
             master_id?: number | null;
             client_id?: number;
             master_report?: string | null;
+            fault_type_id?: number;
           }
         ) => Promise<any>;
         deleteRequest: (id: number) => Promise<any>;
@@ -148,6 +150,16 @@ interface Window {
         ) => Promise<any>;
         deleteUsedDetail: (id: number) => Promise<any>;
       };
+      faultType: {
+        getFaultType: (id: number) => Promise<any>;
+        getFaultTypes: (filters?: { name?: string }) => Promise<any[]>;
+        createFaultType: (faultType: { name: string }) => Promise<any>;
+        updateFaultType: (
+          id: number,
+          faultType: { name: string }
+        ) => Promise<any>;
+        deleteFaultType: (id: number) => Promise<any>;
+      };
     };
   };
 }
@@ -163,6 +175,7 @@ interface Request {
   start_date: string;
   end_date?: string;
   master_report?: string;
+  fault_type_id?: number;
 }
 
 interface TechType {

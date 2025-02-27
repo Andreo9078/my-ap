@@ -1,7 +1,17 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { Button, Card, Form, Input, InputNumber, Modal, Space } from "antd";
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  InputNumber,
+  Modal,
+  Select,
+  Space,
+} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useElectronAPI } from "../hooks/useElectronAPI";
+import { useEffect, useState } from "react";
 
 interface ModalReportProps {
   title?: string;
@@ -14,15 +24,32 @@ interface ModalReportProps {
   requestId: number;
 }
 
+interface FaultType {
+  dataValues: {
+    id: number;
+    name: string;
+  };
+}
+
 const ReportModal: React.FC<ModalReportProps> = ({
   title,
   onCancel = () => {},
-  canselText = "Cancel",
-  okText = "Save",
+  canselText = "Отмена",
+  okText = "ОК",
   requestId,
 }) => {
   const electronAPI = useElectronAPI();
   const [form] = Form.useForm();
+  const [faultTypes, setVaultTypes] = useState<FaultType[]>([]);
+
+  useEffect(() => {
+    const fetchFaultTypes = async () => {
+      const types = await electronAPI.requests.faultType.getFaultTypes();
+      setVaultTypes(types);
+    };
+
+    fetchFaultTypes();
+  }, []);
 
   const onFinish = async () => {
     const values = await form.validateFields();
@@ -56,6 +83,7 @@ const ReportModal: React.FC<ModalReportProps> = ({
       const request = await electronAPI.requests.request.getRequest(requestId);
       electronAPI.requests.request.updateRequest(request.dataValues.id, {
         status_id: 3,
+        fault_type_id: values.faultType,
         master_report: values.report,
         end_date: new Date(),
       });
@@ -144,6 +172,26 @@ const ReportModal: React.FC<ModalReportProps> = ({
               </Form.List>
             </Form.Item>
 
+            <Form.Item
+              name="faultType"
+              rules={[
+                {
+                  required: true,
+                  message: "Пожалуйста, выберете тип неисправности",
+                },
+              ]}
+            >
+              <Select placeholder="Выберите тип неисправности">
+                {faultTypes.map((type) => (
+                  <Select.Option
+                    key={type.dataValues.name}
+                    value={type.dataValues.id}
+                  >
+                    {type.dataValues.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            </Form.Item>
             <Form.Item
               label="Отчет"
               name={"report"}
